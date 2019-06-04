@@ -2,19 +2,23 @@
 
 # Java Primitive Types
 Integers
+-
 - byte (1 byte)
 - short (2 bytes)
 - int (4 bytes)
 - long (8 bytes)
 
 Floating Point Numbers
+-
 - float (4 bytes)
 - double (8 bytes)
 
 Characters
+-
 - char (2 bytes)
 
 Boolean
+-
 - boolean (1 byte)
 
 Note that primitive types in Java are stored on the stack.
@@ -41,6 +45,7 @@ Java does not check for overflow
 - Note: we do not have to use the keyword new when creating strings (but we can).
 
 Methods
+-
 - .length() – returns number of characters in the string
 - .substring(int start, int end) – returns the substring starting at position start up to and not including position end.
 - .toUpperCase(), .toLowerCase() - converts String to upper / lower case
@@ -50,6 +55,7 @@ Methods
 - s1.compareTo(String s2) - Lexicographical comparison
 
 Concatenation
+-
 - Combine strings with +
 - Convert a String to an Int with 
     - String s = "3"; 
@@ -58,6 +64,7 @@ Concatenation
     - String s = Integer.toString(3);
 
 Pool
+-
 - Java does some optimization by storing identical Strings that are declared in code to reference the same location in memory.
 - If the String changes, then Java will allocate another section in memory for the updated string. Java Strings are immutable (i.e. they can’t be changed in memory once created).
 - The 'new' keyword bypasses the String pool and creates a separate memory location for the initialized String.
@@ -101,15 +108,18 @@ Pool
   
 # Class Definitions
 Public vs Private
+-
 - Public means any instantiated object of that class can directly access a public variable / method.
 - Private means only the class itself can have direct access to that variable / method.
 
 'this' Keyword
+-
 - “this” refers to this class
 - Used mainly to disambiguate variables within the class
 - Without “this”, Java could think you’re referring to the parameter name instead of class member (due to scoping).
 
 Accessor/Mutator Methods
+-
 - private variables
     - private String color;
     - private double amount;
@@ -123,16 +133,19 @@ Accessor/Mutator Methods
     - public void setAmount(double amount) { this.amount = amount; }
 
 Static
+-
 - Static class variables belong to the class instead of a specific instance of an object.
 - Static variables are shared among ALL instances of the class.
 Methods that do not require an instance of an object (i.e. a constructed object) for it to be called.
 
 # Overloading
 Methods
+-
 - Combination between methods with the same name and parameter types is called the method signature.
 - Within a class, we can have methods with the same name, but not the same signature.
 
 Constructors
+- 
 - Constructors can be overloaded as well.
 - A default constructor is a constructor without any parameters.
 - If no constructor is provided, Java makes one that sets the class variables to default values.
@@ -192,6 +205,64 @@ int randomInt = gen.nextInt(4);    //[0,3]
 - The java.lang.StackOverflowError Exception is thrown.
 - ex: Infinite recursion, increased stack size
 
+# Exception Handling
+- Allows programmers to catch and handle error conditions that occur throughout a program.
+
+Exception Object
+- 
+- A java object that represents a certain error condition.
+- Many types of Exceptions can occur (IOException, NullPointerException, ArithmeticException, …)
+  - Java will create and “throw” an exception when it occurs for certain cases.
+  - All exceptions are inherited from the Exception Java object.
+  - Programmers can manually create and throw their own Exception object by extending from the Exception class.
+  - Can contain information or perform certain actions.
+  - All Java Exceptions carry information, such as the name of the Exception and stack trace.
+  
+Try/Catch Blocks
+- 
+- Exceptions that are thrown need to be handled somewhere in your code.
+- If an exception occurs within a try block, you can catch the Exception and execute code in a corresponding catch block.
+- If a catch block is executed, it resumes functionality after the try/catch block.
+
+Multiple Exceptions
+- When catching an Exception, you can execute different actions based on what Exception was caught.
+- Java goes through each catch block one-by-one until a compatible Exception is matched.
+- To catch any Exceptions, you can catch an Exception type (since all Exceptions are inherited from the Exception class).
+
+Finally Block
+-
+- Regardless of what happens in a try/catch block, the code in “finally” will always execute.
+
+Custom Exceptions
+-
+- An Exception type can be declared by defining the Class that extends the Exception class.
+- You can create, throw, catch this type in your code depending on some action.
+- You can also maintain additional information or provide your own methods if needed.
+
+# Testing
+- Testing every possible path in every possible situation.
+- Complete tests are infeasible!
+- The best we can hope for is trying to approximate a Complete Test by testing various types of cases.
+- The more rigorous testing a program can “pass”, the more confidence is gained that the program “bulletproof”.
+
+Test Suite
+- 
+- A program containing various tests confirming certain behavior.
+
+Types of Test Cases
+- 
+- Normal Cases: Any expected or “normal” input cases that you can reasonably expect from the user.
+- Error Cases: Any case where it’s not expected, but is possible
+  - Passing in a null object, having a bad file name, disabling network connectivity for something that requires it…
+- Boundary Cases: Testing the borders of the input.
+  - Testing both max / min value for int parameters.
+
+JUnit
+- 
+- JUnit allows a programmer to perform automated tests.
+- Runs one or more methods on the objects you are testing and checks the results using assertions.
+- Tests are run one after another and will produce a graphical report on the cases that passed, the tests that encountered an error (i.e. crashed), and the tests that didn’t crash, but failed an assertion.
+- assertEquals, assertFalse, assertTrue, assertNull, assertArrayEquals
 
 
 
