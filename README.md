@@ -73,20 +73,20 @@ Pool
 - Allows the execution of code if some boolean value is true.
 Example:
 
-    if (boolean) 
-    {
-      statement;
-    }
+      if (boolean) 
+      {
+        statement;
+      }
   
-    else if (boolean) 
-    {
-      statement;
-    }
+      else if (boolean) 
+      {
+        statement;
+      }
   
-    else 
-    {
-      statement;
-    }
+      else 
+      {
+        statement;
+      }
 
 # Relational vs Logical Operators
 - Relational: ==, !=, <, <=, >, >=
@@ -344,31 +344,18 @@ Shorthanded way to write a multi-way if statement
 
 
     String x;
-
     int y = 2;
-    
-    switch (y) {
-    
+    switch (y) {  
       case 1: x = "One";
-    
         break;
-  
-      case 2: x = "Two";
-    
+      case 2: x = "Two";  
+        break; 
+      case 3: x = "Three";    
         break;
-  
-      case 3: x = "Three";
-    
+      case 4: Case 5: x = "Four or Five";  
         break;
-  
-      case 4: Case 5: x = "Four or Five";
-    
-        break;
-  
-      default: x = "Undefined";
-    
-        break;
-    
+      default: x = "Undefined"; 
+        break;  
     } 
 
 - Can have a default case at the end to handle any input that does not have a matching case
@@ -405,4 +392,4 @@ Formatting Data
 
 
 
-v
+
