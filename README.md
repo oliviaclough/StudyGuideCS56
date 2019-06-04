@@ -144,6 +144,53 @@ Constructors
 - Pass by reference is when the original variable is passed into a method. Any changes to this variable will remain changed when out of scope.
   - Java passes everything by value
 
+# Command Line Arguments
+- Similar to C++, we can pass in content into our program when executing it using command line arguments.
+- This is what the String[] args portion in the main method is.
+- All of the command line arguments are of String types and we need to convert them to numbers if needed.
+
+# Console Input
+- A way for users to interact with their programs is by using the console for input.
+  - Your program can prompt users for information and users can enter information into the program by typing it in the console.
+  - There are several ways to do this, but we will use the Scanner object for this purpose.
+  - The Scanner object can be used for several types of I/O interaction including files (more on this later).
+
+import java.util.Scanner;
+
+Scanner s. = new Scanner(System.in);
+
+String t = s.nextLine();
+
+# Random Number Generation
+- Java’s API gives us the Random object (java.util.Random).
+
+import java.util.Random;
+
+Random gen = new Random();
+
+int randomInt = gen.nextInt(4);    //[0,3]
+
+# Arrays
+- You can allocate memory to store items of the same type with arrays.
+- Recall, arrays are indexed from 0 to n – 1.
+- The items in a Java array must be of the same type.
+- Arrays are objects in Java (i.e. they’re not primitive types like in C++).
+- .length is not a method here, it's a value
+- .clone() copies the contents of the array
+
+# ArrayLists
+- Arrays need to be defined with a predetermined size.
+- If you try and access / add to a position past the size, an error occurs.
+- Sometimes we don’t know what the size limit is and we want to expand our array automatically.
+- We don’t know what an ArrayList can hold and we want to make it general enough where it can hold any type the programmer wants.
+- .set() changes existing item of an ArrayList
+- .remove() removes the idem by index or the Object
+- .add() adds an object to the end
+
+# Stack Overflow
+- When a program crashes due to running out of memory in the call stack.
+- The java.lang.StackOverflowError Exception is thrown.
+- ex: Infinite recursion, increased stack size
 
 
 
