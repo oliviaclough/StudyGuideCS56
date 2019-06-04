@@ -71,21 +71,22 @@ Pool
 
 # Control Flow
 - Allows the execution of code if some boolean value is true.
+Example:
 
-  if (boolean) 
-  {
-    statement;
-  }
+    if (boolean) 
+    {
+      statement;
+    }
   
-  else if (boolean) 
-  {
-    statement;
-  }
+    else if (boolean) 
+    {
+      statement;
+    }
   
-  else 
-  {
-    statement;
-  }
+    else 
+    {
+      statement;
+    }
 
 # Relational vs Logical Operators
 - Relational: ==, !=, <, <=, >, >=
@@ -94,17 +95,17 @@ Pool
     - right expression only evaluated based on the left most expression
 
 # Loops
-  while(boolean) {
-    statement;
-  }
+    while(boolean) {
+      statement;
+    } 
   
-  do {
-    statement;
-  } while (boolean);
+    do {
+      statement;
+    } while (boolean);
   
-  for (initial, boolean, update) {
-    statement;
-  }
+    for (initial, boolean, update) {
+      statement;
+    }
   
 # Class Definitions
 Public vs Private
@@ -120,17 +121,20 @@ Public vs Private
 
 Accessor/Mutator Methods
 -
-- private variables
-    - private String color;
-    - private double amount;
+private variables
 
-- getter
-    - public String getColor() { return color; }
-    - public double getAmount() { return amount; }
+      private String color;
+      private double amount;
 
-- setter
-    - public void setColor(String color) { this.color = color; }
-    - public void setAmount(double amount) { this.amount = amount; }
+getter
+
+      public String getColor() { return color; }
+      public double getAmount() { return amount; }
+
+setter
+
+      public void setColor(String color) { this.color = color; }
+      public void setAmount(double amount) { this.amount = amount; }
 
 Static
 -
@@ -167,21 +171,22 @@ Constructors
   - Your program can prompt users for information and users can enter information into the program by typing it in the console.
   - There are several ways to do this, but we will use the Scanner object for this purpose.
   - The Scanner object can be used for several types of I/O interaction including files (more on this later).
+Example:
 
-import java.util.Scanner;
+    import java.util.Scanner;
 
-Scanner s. = new Scanner(System.in);
+    Scanner s. = new Scanner(System.in);
 
-String t = s.nextLine();
+    String t = s.nextLine();
 
 # Random Number Generation
-- Java’s API gives us the Random object (java.util.Random).
+Java’s API gives us the Random object (java.util.Random).
 
-import java.util.Random;
+    import java.util.Random;
 
-Random gen = new Random();
+    Random gen = new Random();
 
-int randomInt = gen.nextInt(4);    //[0,3]
+    int randomInt = gen.nextInt(4);    //[0,3]
 
 # Arrays
 - You can allocate memory to store items of the same type with arrays.
@@ -267,10 +272,11 @@ JUnit
 # Inheritance
 - Inheritance is a way of extending functionality and properties of an existing class.
   - and allows you to add new features and overwrite existing ones.
-  
-public class Vehicle { ... }
+Example:  
 
-public class Car extends Vehicle { ... }
+    public class Vehicle { ... }
+
+    public class Car extends Vehicle { ... }
 
 - Note that Java calls our default constructor from the base class first, and then subclasses (top-down).
   - If you define constructors, call 'super()' in the sub classes constructor in order to extend base class
@@ -282,22 +288,22 @@ public class Car extends Vehicle { ... }
   - Car is an instance of Vehicle, Car, and Object but NOT an instance of Truck
 
 # Polymorphism
-- All Java classes extend the Object class
+All Java classes extend the Object class
 
-Object o = new Car();
+    Object o = new Car();
 
-Object o1 = new int[100];
+    Object o1 = new int[100];
 
-- But Object does not extend all Java classes
+But Object does not extend all Java classes
 
-Car c = new Object(); //VERY ILLEGAL!!!
+    Car c = new Object(); //VERY ILLEGAL!!!
 
 - Only Object methods are available if assigning a subclass to an Object class type (.toString() , .equals())
-- Can declare a class/method as final to prevent others from extending and overriding it
+Can declare a class/method as final to prevent others from extending and overriding it
 
-public final class Vehicle { ... }
+    public final class Vehicle { ... }
 
-public final String toString() { ... }
+    public final String toString() { ... }
 
 Memory Slicing
 - 
@@ -334,34 +340,36 @@ Casting Objects
 public class Student extends Person implements Comparable { ... }
 
 # Swtich Statements
-- Shorthanded way to write a multi-way if statement
+Shorthanded way to write a multi-way if statement
 
-String x;
 
-int y = 2;
-switch (y) {
+    String x;
 
-  case 1: x = "One";
+    int y = 2;
     
-    break;
+    switch (y) {
+    
+      case 1: x = "One";
+    
+        break;
   
-  case 2: x = "Two";
+      case 2: x = "Two";
     
-    break;
+        break;
   
-  case 3: x = "Three";
+      case 3: x = "Three";
     
-    break;
+        break;
   
-  case 4: Case 5: x = "Four or Five";
+      case 4: Case 5: x = "Four or Five";
     
-    break;
+        break;
   
-  default: x = "Undefined";
+      default: x = "Undefined";
     
-    break;
+        break;
     
-} 
+    } 
 
 - Can have a default case at the end to handle any input that does not have a matching case
 - Can also check for multiple values in a single case
