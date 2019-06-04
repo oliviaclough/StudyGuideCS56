@@ -264,5 +264,137 @@ JUnit
 - Tests are run one after another and will produce a graphical report on the cases that passed, the tests that encountered an error (i.e. crashed), and the tests that didn’t crash, but failed an assertion.
 - assertEquals, assertFalse, assertTrue, assertNull, assertArrayEquals
 
+# Inheritance
+- Inheritance is a way of extending functionality and properties of an existing class.
+  - and allows you to add new features and overwrite existing ones.
+  
+public class Vehicle { ... }
+
+public class Car extends Vehicle { ... }
+
+- Note that Java calls our default constructor from the base class first, and then subclasses (top-down).
+  - If you define constructors, call 'super()' in the sub classes constructor in order to extend base class
+- Can derive more subclasses from a subclass 
+  - Ex: Vehicle --> Car --> Truck
+  - Truck will inherit everything from vehicle AND car
+  - Uses constructor chaning to call respective super classes so it is still base to sub 
+- Can use 'instanceof' operator to check if an object reference is legal 
+  - Car is an instance of Vehicle, Car, and Object but NOT an instance of Truck
+
+# Polymorphism
+- All Java classes extend the Object class
+
+Object o = new Car();
+
+Object o1 = new int[100];
+
+- But Object does not extend all Java classes
+
+Car c = new Object(); //VERY ILLEGAL!!!
+
+- Only Object methods are available if assigning a subclass to an Object class type (.toString() , .equals())
+- Can declare a class/method as final to prevent others from extending and overriding it
+
+public final class Vehicle { ... }
+
+public final String toString() { ... }
+
+Memory Slicing
+- 
+- double x = 2.2;  --> int y = (int) x;
+- Can only hold '2' and drops the decimal 
+- Objects on the heap aren't sliced as they use the 'new' keyword
+  - Meaning they have new memory allocated for them, not changing existing memory 
+  
+Casting Objects
+-
+- Vehicle v1 = (vehicle) new Object(); //ERROR NOT VALID
+- Vehicle v2 = (Vehicle) new Car(); //OKAY
+- But be casting compatible objects 
+
+# Abstract Methods
+- Sometimes it doesn’t make sense for a class to provide method definitions
+- For example
+  - A shape’s area is dependent on the type of shape.
+  - … or an Animal class may make a sound, but that sound is dependent on the Animal.
+  - … or a Student may pay different tuitions (international students, out-of-state, international)… or the Unit limit may differ…
+- If it doesn’t make sense for the class to provide a method definition, but know that the method should be implemented somewhere in the subclasses.
+  - Abstract methods can be used!
+  - A method can be declared as “abstract” if there is no sensible solution to provide an implementation in the base class.
+- Subclasses either override the method and privide an implementation or declare itself abstract also and have a different subclass implement it
+
+# Interfaces
+- An interface is a mechanism for defining a “purely abstract class”
+  - Similar to classes, Interfaces are considered as a type
+  - Similar to abstract classes, Interface objects cannot be instantiated.
+  - Interfaces may contain only public non-static methods and public static final fields (i.e. constants).
+- It’s used when you want to specify a behavior that a class (and subclasses) need to support without specifying any implementation details.
+- A class may implement multiple Interfaces.
+
+public class Student extends Person implements Comparable { ... }
+
+# Swtich Statements
+- Shorthanded way to write a multi-way if statement
+
+String x;
+
+int y = 2;
+switch (y) {
+
+  case 1: x = "One";
+    
+    break;
+  
+  case 2: x = "Two";
+    
+    break;
+  
+  case 3: x = "Three";
+    
+    break;
+  
+  case 4: Case 5: x = "Four or Five";
+    
+    break;
+  
+  default: x = "Undefined";
+    
+    break;
+    
+} 
+
+- Can have a default case at the end to handle any input that does not have a matching case
+- Can also check for multiple values in a single case
+
+# File IO
+- 
+
+Scanner Object 
+-
+- 
+
+Delimiters
+-
+-
+
+Writing to a File
+-
+- PrintWriter
+- FileWriter
+
+Formatting Data
+-
+-
 
 
+
+
+
+
+
+
+
+
+
+
+v
