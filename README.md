@@ -482,20 +482,85 @@ Example:
 - Can be used in many forms (ex, process management), but is commonly used for Object Oriented (OO) Design.
   - Identifies OO components (such as classes / interfaces)
   - Identifies the relationships between these components
-      
+- Breaking out the varying functionality is known as the Strategy (Behavior) Design Pattern.
+- In case we want to make a change for a behavior, we only need to change the Behavior class (not all subclasses implementing the behavior).
+- Can be useful to solve certain maintenance issues as described above.  
+
+# Observer Pattern
+- A way of creating real-time updates
+- The Observer pattern is a publication/subscription (pub/sub) design that updates information whenever necessary without having to worry about periodic probing.
+  - Object state can be updated whenever something changes.
+- In general, there needs to be a:
+  - Subject (Publisher): Object(s) that maintains data and sends updated information whenever a change occurs
+  - Observer (Subscribers): Object(s) that subscribe to certain Subjects and obtain updated information whenever it occurs.
+- Usually shown with a .update() method that is declared in the Observer interface and then overridden in the class that implements the interface
+- This is an example of a “push” design (i.e. the updates occur whenever they happen without asking for the updates.).
+- We can also modify update to react to “pull” relevant info.
+
+# Decorator Pattern
+- A situation where you must keep track of various attributes for objects, where all attributes can be used in combination with each other.
+- “attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality”
+
+Open-Close Principle
+-
+- Classes should be open for extension, but closed for modification.
+  - Basically, once a class is written and tested, we don’t want to modify this.
+  - But we want to extend functionality and we can do this by creating additional classes and test those.
+  - If specifications change, then we can modify a single class instead of modifying the change in multiple places.
+- Separate Components that contain multiple Behaviors or Attributes (Decorators).
+- Components and Behaviors will extend from a common type.
+  - This is important for wrapping components with the necessary decorators.
+
+# Extending Interfaces
+- You can have interfaces extending other existing Interfaces
+  - Usually done when you want to make an Interface with more specific functionality.
+  - Polymorphism allows the correct method to be called on a specific object.
+Example: 
+  
+    public interface InterfaceA { ... }
+    public interface InterfaceB extends InterfaceA { ... }
+    public interface InterfaceC { ... }
     
+    public class ClassA implements InterfaceA { ... }
+    public class ClassB implements InterfaceB { //which extends InterfaceA }
+    public class ClassC implements InterfaceB, InterfaceC { //Interface A, B, C }
     
+# Collections
+Collection Interface
+-
+- An unordered group of objects allowing duplicate entries
+- Common methods:
+  - int .size()
+  - boolean .add(item)
+  - boolean .remove(item)
+  - boolean .isEmpty()
 
+List Interface
+-
+- An unordered group of objects allowing duplicate entries that are indexed.
+- Common methods:
+  - Object .get(index)
+  - int .indexOf(item)
+- Examples: LinkedList, ArrayList
 
+Set
+-
+- A collection containing no duplicate elements
+- Ensures that no pair of objects are equal to each other
+- For every object in the set, .equals(item) should return false
 
-
-
-
-
-
-
-
-
-
-
-
+Map
+-
+- Technically doesn’t extend the Collection interface, but it can be considered a Collection of values.
+- A collection of items stored as (key, value) pairs.
+- Keys are unique and can only map to one Object (but the Object can contain multiple values)
+- Keys are represented as any object (normally strings or ints)
+- Values can be represented as any Object
+- Common methods:
+  - boolean .containsKey(key)
+  - boolean containsValue(value)
+  - Object .get(key)
+  - Object .put(key, value) // returns previous value for key or null
+  - boolean .remove(key, value) // returns true if the key mapped to the value and was removed
+  - Object .remove(key) // returns previous value for key or null
+- Examples: HashMao, TreeMap
