@@ -362,24 +362,130 @@ Shorthanded way to write a multi-way if statement
 - Can also check for multiple values in a single case
 
 # File IO
-- 
+- Data from input source or output destination is represented in a “stream”
+  - A stream is a sequence of binary data (0’s and 1’s).
+- Since bytes are usually the smallest piece of data, Java has Stream objects that read / write data in 8-bit (1 byte) pieces.
+
+- American Standard Code for Information Interchange (ASCII)
+  - Each character is represented as 1 byte
+  - This standard was only keeping English in mind…
+- Unicode
+  - Can represent characters from a larger set
+  - We need more than 8 bits to represent characters from different languages.
+- UTF-8
+  - can store anywhere between 1 – 4 bytes per character
+  - Most common standard for the web
+  - UTF-16 – can store characters with 2 or 4 bytes
 
 Scanner Object 
 -
-- 
+- In Java, reading from Files and user input from the command line can be done in several different ways.
+- Scanner is a Java Object we’ve used to collect user input and this can be used for File I/O
+- We can also use Scanners to read data from a file into the application.
+Example:
+
+    Scanner inFile = new Scanner(new File("fileName.txt"));
+    
+ - Tokens are the next “piece” of data you can expect when scanning through the stream.
+  - .hasNext(), .hasNextInt(), .hasNextLong(), .hasNextByte(), .hasNextDouble()
 
 Delimiters
 -
--
+- Scanners use delimiters to distinguish what is “next” to read on the input stream.
+- By default, Scanners have a delimiter set to any number of whitespace characters.
+- If our first line was written as “This is line 1”, the tokens will be the same.
+- Scanner breaks the pieces into non-whitespace tokens.
+  - We can set Scanner to use a specific delimiter.
+  - When inFile.next() is called, it will read the token and put it into a String up to the delimiter or \n character.
+Example of Delimiter
+
+      inFile.useDelimiter(“l”);
+      
+ Example of using .split() after
+ 
+    s = inFile.nextLine();
+    stringArray = s.split(",");
 
 Writing to a File
 -
 - PrintWriter
+  - A simple object called PrintWriter exists, which allows you to write content to a file.
+  - PrintWriter is very simple and doesn’t allow you to append to an existing file using the object directly
 - FileWriter
+  - Another object, FileWriter, provides more functionality than PrintWriter, including the ability to append to an existing file.
 
 Formatting Data
 -
+- System.out.printf() is used to display formatted text.
+- System.out.format() behaves the same as System.out.printf().
+- %s is known as a format specifier
+- s is known as a conversion character
+- %d  decimal integer (or just integer)
+- %f  floating point
+- %e  floating point in exponential notation
+- %c  Characters
+- %s  Strings
+- %b  boolean
+- %%  ‘%’ sign
+- Positive values indicate a left justified String //%10s
+- Negative values indicate a right justified String //%-10s
+
+# Generics
+- A programmer can create their own Generic representations.
+- In Java, generic types cannot be primitive (though we have use object wrappers for primitive types).
+
+Methods
 -
+- Assume we want to write a method that takes an array, gets the last item of an array, and returns that item.
+  - We could write the same method for all different parameter types
+Example:
+
+    public static <T> T getLastItem(T[] array) { ... }
+
+Classes
+-
+- We can also create entire classes that are generic.
+- Assume we want to write a simple class storing a pair of values of different types
+Example:
+    
+    public class Pair<T> {
+      private T first;
+      private U second;
+      
+      public Pair(T first, U second) {
+        this.first = first;
+        this.second = second;
+      }
+      
+      public void print() {
+        System.out.println(first + " , " + second);
+      }
+    }
+
+# 2D Arrays
+- We can actually organize data into multiple dimensions with multi-dimensional arrays.
+  - Good way to think of it is an array of arrays
+Example:
+
+      int[][] int2D = new int[4][5];
+      for (int i=0; i<int2D.length; i++){
+        for (int j=0; j<int2D[i].length; j++){
+          System.out.println(int2D[i][j] + " ");
+        }
+        System.out.println();
+      }
+      
+- Can also be 3D Arrays and so on ... 
+
+# UML (Unified Modeling Language)
+- Pictorial “language” used to visualize software architecture and design.
+- Can be used in many forms (ex, process management), but is commonly used for Object Oriented (OO) Design.
+  - Identifies OO components (such as classes / interfaces)
+  - Identifies the relationships between these components
+      
+    
+    
+
 
 
 
