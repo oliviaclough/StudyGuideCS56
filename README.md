@@ -565,3 +565,109 @@ Map
   - boolean .remove(key, value) // returns true if the key mapped to the value and was removed
   - Object .remove(key) // returns previous value for key or null
 - Examples: HashMao, TreeMap
+
+# Concurrency
+- Working on “parts of a problem” concurrently if the parts can be done independently.
+  - Many applications use concurrency for performance reasons.
+  - Web servers process requests concurrently.
+  - Web browsers fetch / render images concurrently.
+  - Embarrassingly Parallel problems are usually a good fit for concurrent computing.
+- Concurrency also allows efficient use of hardware.
+  - For multi-core processors, you can design your program such that several parts of it work concurrently.
+  - Each processor (core) in this case runs instructions in parallel.
+  - For single-core architectures, it provides the illusion that something is working concurrently, but the processor is shared among all programs.
+  - The processor does context switching between the various programs, but it cannot process instructions concurrently.
+  
+# Threads
+- A thread is a program unit that is executed independently of other parts of your program.
+  - Every Java application has a single process called the main process or main thread.
+  - Every thread that the main process creates is called a subprocess or subthread.
+  - A sub-process shares the memory space of the main process.
+
+Runnable Interface
+-
+- We can define and manage threads by implementing the Runnable Interface (rather than creating a class that extends Thread).
+- Will need to create thread objects that pass in the Runnable classes.
+
+Example:
+
+    public class ThreadingEx implements Runnable {
+      private String id;
+      public ThreadingEx(String i) { this.id = i; }
+      public void run() {
+        int x=0;
+        while(true) {
+          x++;
+          if (x % 2 = 0) {
+            System.out.println(x + " : " + id);
+          }
+        }
+      }
+    }
+    
+- You can put threads to sleep if you want it to periodically continue its task.
+  - Thread.sleep(long milliseconds) allows the programmer to tell a thread to sleep for a certain period of time.
+  - While the thread is sleeping, no CPU resources are dedicated to executing its statements.
+  - .sleep() throws the InterruptedException since a thread may be interrupted while sleeping.
+  
+Race Conditions
+-
+- If threads share some memory (for example, an object), read / write order conflicts can happen.
+
+Locks
+-
+- A solution to a race condition is to block thread access to a shared object.
+- We can surround code manipulating a shared resource with Lock objects (specifically ReentrantLock).
+- There are several other ways to do this (including the keyword synchronized).
+- Synchronized can be used on a method level to prevent multiple threads from executing this concurrently.
+- A little less flexible than the lock mechanism, but works in a similar way.
+
+# Lambda Expressions
+- Can be used with existing interfaces or custom created ones
+
+Example Using Collections.sort:
+
+    Collections.sort(a, (s1, s2) -> {
+      if (s1.getX() > s2.getX())
+        return 1;
+      else
+        return -1;
+    });
+    
+Example Using Runnable:
+
+    Thread t1 = new Thread(() -> {
+      int i = 0;
+      while (true) {
+         ++i;
+         System.out.println(i);
+      }
+    });
+
+Anonymous Classes
+- 
+- Anonymous classes can be used to define classes extending abstract classes or implementing interfaces.
+- Could be useful for code organization
+  - If we only want to use the class once and define specific behavior, we …
+    - Could implement a class file
+    - Or just define the behavior and move on.
+  - If a class is used in multiple parts in your code, then providing its own implementation may be better for readability / reusability reasons.
+  
+Example (Assunimg Animal Interface exists):
+
+    Animal dog = new Animal() {
+      public void sound() {
+        System.out.println("BARK!");
+      }
+    };
+
+Lamba
+-
+- Allows pieces of functionality to exist without it being defined in a class.
+- Functions are defined inline whenever we need it.
+- Lambda functions are used with Functional Interfaces
+
+Example (Assunimg Animal Interface exists):
+    
+    Animal dog = () --> {System.out.println("BARK"); };
+    
