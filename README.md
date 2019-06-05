@@ -515,6 +515,7 @@ Open-Close Principle
 - You can have interfaces extending other existing Interfaces
   - Usually done when you want to make an Interface with more specific functionality.
   - Polymorphism allows the correct method to be called on a specific object.
+  
 Example: 
   
     public interface InterfaceA { ... }
