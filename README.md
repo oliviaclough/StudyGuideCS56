@@ -788,3 +788,230 @@ Lambda Expressions
 - Implements functional interfaces
 - Know syntax of providing definition of functional interface's abstract method
 - Defining lambda expression for Comparator interface and Runnable
+
+
+# Homework Questions
+
+Homework 00
+-
+- 2 classes needed for testing an individual class: One class is for the objects you want to use, the second class is the "tester class" that contains objecrs of the first class and accesses its instance variables and methods as the sole purpose
+- The heap contains all objects created with the 'new' keyword, and the JVM manages the memory space and will remove objects when they are no longer necessary to free up memory space
+- Source code: the actual code in a specified language
+- Compiler: used to run the code and check for errors that would prevent it from running
+- Java Bytecode: Compiler takes the source code and turns it into Java bytecode
+- JVM: what the Java bytecode is run on (software)
+- ridgid code much more inefficient than a flexible OO approach to writing code due to the fact that if the specs for one part changes, all of the code has to be redone and retested
+
+Homework 01
+-
+- Primitive types home fundamental values
+  - the actual value is stored in the variable
+- Reference types hold references to objects
+  - bits representing the path to the object is stored in the variable
+- double x = 3.4;   vs    float y = 3.4f;
+- Array in Java is an object
+- All references for a given JVM are the same size
+  - but the amount of memory taken up by an object can differ
+- References of the same type can be different sizes on different JVMs
+- == is used to compare two primitive types
+- .equals() is used to compare two objects
+
+Homework 02
+-
+String to Int
+
+    String s = "3";
+    int p = Integer.parseInt(s);
+   
+Random Numbers [0, n-1]
+
+    int x = (int)(Math.random()*(n));
+    
+- Writing tests before writing the actual code can make it easier and faster to write the code. It is easier to clarify what the method needs to do
+- Continuous integration: constantly update the code and running tests for each task completed
+- Pair programming: working together helps check over code to limit human error
+- Encapsulation forces code to go through setter methods to change any variable (can check parameters) so the code can be edited in one place without breaking others
+
+Array Declaration:
+
+    Student[] students = new Student[5];
+    
+ArrayList Declaration:
+
+    ArrayList<Student> students = new ArrayList<Student>();
+    
+ Homework 03
+ -
+ - Valid inheritance examples
+  - guitar extends instrument
+  - friedEgg extends food
+  - beagle extends pet
+  - gratefulDead extends band
+- Polymorphic arguments and return types..
+  - If you have a Boss object with a .fire() function that takes an Employee object as the parameter, you can call this function and pass in any object that extends the Employee class such as a softwareEngineer or a Janitor 
+- An abstract class has one or more abstract functions that must be overridden and the others may be defined in the class and interfaces are 100% pure abstract so all functions must be overridden
+- Overloading is when two methods have the same name but different argument lists
+- Overriding is when subclasses rewerite the superclass method with the same argument list and compatible return type
+
+Homework 04
+-
+- Java will create a default no-arg constuctor for you if you do not initialize any constructor of your own. 
+- The only exceptions that do not have to be caught or declared to be through are extensions of the RuntimeExceptions class
+- RuntimeExceptions are for flaws in the code that should not have happened, you want these to happen at development
+- Other exceptions are incase a condition falls at runtime in ways that you cannot predict/prevent. Use try/catch blocks for these to handle exceptional situatuons out of your control (Ex: user input)
+
+# Lab Basic Ideas
+
+Lab01
+-
+- 2 classes -> Book and Author
+- Book class has private attributes including an Author object
+- Author class has private attributes of its own
+- Both classes need setter/getter methods due to encapsulation
+- Must make a deep copy of the Author object into the Book object
+
+Shallow Copy Constructor in Author class
+
+    
+    //copy constructor
+    public Author(Author a) {
+	    this.firstName = a.getFirstName();
+	    this.lastName = a.getLastName();
+	    this.birthYear = a.getBirthYear();
+	    this.pubs = a.getPubs();
+    }
+    
+Deep Copy Constructor in Book Class
+
+    
+    //deep copy constructor
+    public Book (Book b){
+	    this.pages = b.getPages();
+	    this.year = b.getYear();
+	    this.price = b.getPrice();
+	    this.title = b.getTitle();
+
+	    this.author = new Author(b.getAuthor());
+    }
+    
+Lab02
+-
+- Random Number Generation
+- User input with Scanner object
+  - Including checks for validity
+- Multiple class design
+- Monitoring variables that are updated in individual methods in a separate class
+
+Lab03
+-
+- Array functionality
+  - add
+  - remove
+  - ordering
+- JUnit testing
+- Case insensitivity in Strings for comparison
+
+Lab04
+-
+- File IO
+- Reading a file into the program
+
+From the Web using a URL
+
+    //read from web
+		String line;
+		Scanner remoteIn = null;
+		try {
+		    URL remoteFileLocation =new URL("https://sites.cs.ucsb.edu/~richert/cs56/misc/lab04/MusicList.txt");
+
+		    URLConnection connection = remoteFileLocation.openConnection();
+		    remoteIn = new Scanner(connection.getInputStream());
+
+		    while (remoteIn.hasNextLine()) {
+			    //parse through file line by line
+			    line = remoteIn.nextLine();
+          .... }
+        } catch (IOException e) {
+		        System.out.println(e.toString());
+		    } finally {
+		        if (remoteIn != null) {
+			        remoteIn.close();
+		        }
+		    }
+    
+From the disk (root directory)
+
+    //read from disk
+	   Scanner inFile = null;
+	   String line;
+	   try {
+	       inFile = new Scanner(new File("MusicList.txt"));
+	       while (inFile.hasNextLine()) {
+			      //parse through file line by line
+			      line = inFile.nextLine();
+            .... }
+        } catch (IOException e) {
+		        System.out.println(e.toString());
+		    }
+        
+-ArrayLists
+  - .add()
+  - .remove()
+  - .get()
+  - .size()
+- Implementing interfaces
+
+Writing to a File in the correct format
+
+    import java.io.*;
+    import java.util.Locale;
+
+    public class OutputFile implements OutputFileInterface{
+      private PrintWriter out;
+    
+      //implement output file interface
+      public void open(String outputFileName){
+	      String t = "TITLE";
+	      String art = "ARTIST";
+	      String alb = "ALBUM";
+	      String len = "LENGTH";
+	      String yr = "YEAR";
+	      String addit = "ADDITIONAL_INFORMATION";
+	
+	      try {
+	        out = new PrintWriter(outputFileName);	    	
+        } catch (Exception e) {
+	        System.out.println(e.toString());
+	      }
+	
+	      out.format("%-40s%-40s%-40s%-7s%-5s%-40s\n", "TITLE","ARTIST","ALBUM","LENGTH","YEAR","ADDITIONAL_INFORMATION");
+      }
+
+    
+      public void writeItem(MusicTrack trackToWrite){
+	      String format = trackToWrite.getFormat();
+	      String title = trackToWrite.getTitle();
+	      String artist = trackToWrite.getArtist();
+	      String album = trackToWrite.getAlbum();
+	      String length = trackToWrite.getLength();
+	      String add = trackToWrite.getAdditionalInfo();
+	      int year = trackToWrite.getYear();
+	 
+	      out.format("%-40s%-40s%-40s%-7s%-5d%-40s\n",title, artist, album, length, year, add);
+	
+      }
+
+      public void close(){
+	      out.close();
+      } 
+    }
+    
+Lab05
+-
+- Observer Design Pattern
+- Subject and Observer interfaces implemented
+- .update() method 
+- LinkedHashMao
+- HashSet
+- ArrayList
+- pushing notifications to the Observer
