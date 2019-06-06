@@ -1011,7 +1011,7 @@ Lab05
 - Observer Design Pattern
 - Subject and Observer interfaces implemented
 - .update() method 
-- LinkedHashMao
+- LinkedHashMap
 - HashSet
 - ArrayList
 - pushing notifications to the Observer
