@@ -527,6 +527,8 @@ Example:
     public class ClassC implements InterfaceB, InterfaceC { //Interface A, B, C }
     
 # Collections
+- Collections provide mechanisms for inserting and retrieving various types of data.
+
 Collection Interface
 -
 - An unordered group of objects allowing duplicate entries
@@ -671,3 +673,118 @@ Example (Assunimg Animal Interface exists):
     
     Animal dog = () --> {System.out.println("BARK"); };
     
+    
+# In Class Final Review
+- Cummulative, but the emphasis will be post-midterm material 
+- Know the methods that are in lecture notes, those in code examples are the most likely to be tested on
+
+Post Midterm Topics Below
+-
+
+File IO (Review Lab04)
+-
+- Scanner objects for outside data
+- Absolute vs Relative file paths
+- Reading files from file system vs URL
+- Dilimiters
+  - Breaking into tokens: .useDilimiter, .hasNext, .next, ...
+- Writing / appending data to a file
+  - PrintWriter, FileWriter
+  - open, write to, close
+- String formatting
+  - printf, format
+  - positive vs negative space values for justification
+  - padding Strings
+  - format specifiers (%s, %d, etc)
+  - floating point precision
+
+Generics
+-
+- Similar to C++ templates
+- Generic methods and classes
+
+MultiDimensional Arrays
+-
+- 2D / 3D
+  - Could be really any dimension 
+- Memory Org
+- Syntax
+
+UML
+-
+- Look at tutorials
+- Look at CS48 notes honestly that's more beneficial
+- Basic structure !
+- Fields of classes (attributes)
+- Methods (operations)
+- Relationships (inheritance, ...)
+
+Strategy Design Pattern
+-
+- Also known as Behavior
+- Easier to expand the interface and subsequent classes
+- Using interfaces to be the appropriate type of behavior to be implemented in classes which can be used in other classes
+- Supports the Open-Close Principle
+
+Observer Design Pattern (Review Lab05)
+-
+- Publication / Subscription mechanism
+- Subjects (publishers) update Observers (subscribers) whenever relavent info is updated
+- Notification comes when the thing happens, not over or under pulling
+- Beneficial to push notifications to the Observer in most ways
+- Understand the design and organization 
+
+Decorator Pattern
+-
+- Components containing multiple behaviors / attributes (Decorators)
+- Components and Decorators extend from a common type
+- Component is the base form, Decorators are added onto it 
+- Understand the overall relationships between Components and Decorators
+
+Interfaces extending Interfaces
+-
+- How classes implement multiple Interfaces
+- Understanding the hierarchy and type structure
+
+Collections
+-
+- Understand Java API hierarchy with Collection Interface
+- How other collections (set, list, ...) extends Collection
+- HashSet, HashMap, TreeMap
+- Understanding commonly used methods
+  - HashSet: .add, .size, .contains, .remove,
+  - HashMap: .put, .containsKey, .containsValue, .get, .keySet, .values, .remove, .size
+  
+Multithreads
+-
+- How concurrency is acheived with multi-core architectures
+- OS Schedule behavior (context switching) between processes and threads
+- Creating threads
+  - Thread class
+  - Runnable Interface
+  - .run methods
+- Thread.join()
+- .interupt method
+- Thread.sleep(in milliseconds)
+  - InterruptedException handling
+
+Race Conditions
+-
+- Example of multiple threads updating
+- Using locks to support atomic operations
+  - Lock (ReentrantLock) and synchronized
+
+Anonymous Classes
+-
+- Implementing an interface "on the fly"
+
+Functional Interface
+-
+- Special type of interface that has only one abstract method
+
+Lambda Expressions
+-
+- Allows functionality to be defined outside of a class
+- Implements functional interfaces
+- Know syntax of providing definition of functional interface's abstract method
+- Defining lambda expression for Comparator interface and Runnable
