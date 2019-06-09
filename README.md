@@ -466,6 +466,7 @@ Example:
 # 2D Arrays
 - We can actually organize data into multiple dimensions with multi-dimensional arrays.
   - Good way to think of it is an array of arrays
+  
 Example:
 
       int[][] int2D = new int[4][5];
