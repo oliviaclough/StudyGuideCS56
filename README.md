@@ -397,6 +397,7 @@ Delimiters
 - Scanner breaks the pieces into non-whitespace tokens.
   - We can set Scanner to use a specific delimiter.
   - When inFile.next() is called, it will read the token and put it into a String up to the delimiter or \n character.
+  
 Example of Delimiter
 
       inFile.useDelimiter(“l”);
