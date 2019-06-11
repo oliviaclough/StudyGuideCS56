@@ -661,3 +661,185 @@ public class MainClass {
     System.out.println(b.getBalance());
   }
 }
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// ANON CLASSES LECTURE ------------------------------------------------------------------------------------------------------------
+//Animal.java
+@FunctionalInterface
+public interface Animal {
+  public void sound();
+}
+//MainClass.java
+import java.util.ArrayList;
+public class MainClass {
+  public static void makeSound(Animal animal) { animal.sound(); }
+  public static void main(String[] args) {
+    Animal cat = new Animal() {
+      public void sound() {
+        System.out.println("MEOW");
+      }
+    };
+    Animal dog = new Animal() {
+      public void sound() {
+        System.out.println("BARK");
+      }
+    };
+    Animal cow = new Animal() {
+      public void sound() {
+        System.out.println("MOO");
+      }
+    };
+    
+    ArrayList<Animal> animalList = new ArrayList<Animal>();
+    animalList.add(cat);
+    animalList.add(dog);
+    animalList.add(cow);
+    animalList.add(new Animal() {
+      public void sound() {
+        System.out.println("CAW");
+      }
+    });
+    
+    for (Animal a : animalList) {
+      makeSound(a);
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// LAMBDA EXP LECTURE -------------------------------------------------------------------------------------------------------------
+//Basic implementation
+Animal dog = () -> { System.out.println("BARK"); };
+Animal cat = () -> { System.out.println("MEOW"); };
+Animal cow = () -> { System.out.println("MOO"); };
+
+//implementation with parameters
+//Animal.java
+@FunctionalInterface
+public interface Animal {
+  public void sound(double weight);
+}
+//MainClass.java
+public class MainClass {
+  public static void makeSound(Animal animal) {
+    animal.sound(60);
+  }
+  
+  public static void main(String[] args) {
+    Animal dog = (weight) -> {
+      if (weight > 50)
+        System.out.println("BARK!!!!");
+      else
+        System.out.println("BARK");
+    };
+    Animal cat = (weight) -> {
+      if (weight > 50)
+        System.out.println("MEOW!!!!");
+      else
+        System.out.println("MEOW");
+    };
+    Animal dog = (weight) -> {
+      if (weight > 50)
+        System.out.println("MOO!!!!");
+      else
+        System.out.println("MOO");
+    };
+    
+    ArrayList<Animal> animalList = new ArrayList<Animal>();
+    animalList.add(dog);
+    animalList.add(cat);
+    animalList.add(cow);
+    
+    for (Animal a : animalList) {
+      makeSound(a);
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// LAMBDA WITH COLLECTIONS LECTURE -------------------------------------------------------------------------------------------------
+//Student.java
+public class Student {
+  private String name;
+  private int perm;
+  public Student(String name, int perm) {
+    this.name = name;
+    this.perm = perm;
+  }
+  public String getName() { return name; }
+  public int getPerm() { return perm; }
+}
+
+//MainClass.java
+public class MainClass {
+  public static void main(String[] args) {
+    ArrayList<Student> a = new ArrayList<Student>();
+    a.add(new Student("RICHERT", 666));
+    a.add(new Student("IDC", 1234));
+    a.add(new Student("WTF", 567));
+    a.add(new Student("FUCK U", 8910));
+    
+    //Anon Class
+    Collections.sort(a, new COmparator<Object>() {
+      public int compare(Object 01, Object 02) {
+        Student x = (Student) o1;
+        Student y = (Student) o2;
+        if (x.getPerm() > y.getPerm())
+          return 1;
+        else if (x.getPetm() == y.getPerm())
+          return 0;
+        else
+          return -1;
+      }
+    });
+    
+    //Lambda Expression
+    Collections.sort(a, (s1,s2) -> {
+      if (s1.getPerm() > s2.getPerm())
+        return 1;
+      else if (s1.getPerm() == s2.getPerm())
+        return 0;
+      else
+        return -1;
+    });
+    
+    for (Student s : a) {
+      System.out.println(s.getName() + ": " + s.getPerm());
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// LAMBDA WITH RUNNABLE LECTURE ---------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+  Thread t1 = new Thread(() -> {
+    int i = 0;
+    while(true) {
+      ++i;
+      System.out.println(i);
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  });
+  
+  t1.start();
+}
