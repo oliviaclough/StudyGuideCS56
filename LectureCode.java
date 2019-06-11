@@ -442,3 +442,222 @@ public class MainClass {
     printPizza(pizza2);
   }
 }
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// MULTIPLE INTERFACES LECTURE -----------------------------------------------------------------------------------------------------
+public interface A {
+  public abstract void method1();
+  public abstract void method2();
+}
+
+public interface B extends A {
+  public abstract void method3();
+}
+
+public interface C {
+  public abstract void method4();
+}
+
+public class ClassA implements A {
+  public void method1() { System.out.println("ClassA method 1"); }
+  public void method2() { System.out.println("ClassA method 2"); }
+}
+
+public class ClassB implements B {
+  public void method1() { System.out.println("ClassB method 1"); }
+  public void method2() { System.out.println("ClassB method 2"); }
+  public void method3() { System.out.println("ClassB method 3"); }
+}
+
+public class ClassC implements B, C {
+  public void method1() { System.out.println("ClassC method 1"); }
+  public void method2() { System.out.println("ClassC method 2"); }
+  public void method3() { System.out.println("ClassC method 3"); }
+  public void method4() { System.out.println("ClassC method 4"); }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// COLLECTIONS LECTURE -------------------------------------------------------------------------------------------------------------
+// HashSet implements Set Interface (no guaranteed order)
+HashSet<String> s = new HashSet<String>();
+System.out.println(s.add("S1")); //true - successful 
+System.out.println(s.add("S2")); // true - successful
+System.out.println(s.add("S2")); // false - unsuccessful
+System.out.println(s.size()); // 2
+System.out.println(s.contains("S1")); // true
+System.out.println(s.remove("S1")); // returns true AND removes
+System.out.println(s.contains("S1")); // false
+
+// HashMap
+HashMap<Integer, String> s = new HashMap<Integer,String>();
+System.out.println(s.put(0, "Richert")); // null
+System.out.println(s.put(1, "Wang")); // null
+System.out.println(s.put(0, "RichARD")); // Richert - returns old value	
+
+System.out.println(s.containsKey(1)); // true
+System.out.println(s.containsKey(10)); // false
+System.out.println(s.containsValue("Richert")); // false
+System.out.println(s.containsValue("RichARD")); // true
+
+// Get Value for specific key
+System.out.println(s.get(1)); // Wang
+
+// Traverse Keys
+for (Integer i : s.keySet()) {
+  System.out.println(i);
+}
+
+// Traverse values
+for (String i : s.values()) {
+  System.out.println(i);
+}
+
+System.out.println(s.remove(0)); // RichARD
+System.out.println(s.containsValue("RichARD")); // false
+System.out.println(s.remove(1, "fjskj")); // false
+System.out.println(s.remove(1, "Wang")); // true
+System.out.println(s.size()); // 0
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// CONCURRENCY LECTURE -------------------------------------------------------------------------------------------------------------
+//creating threads
+public class MyThread extends Thread {
+  public void run() {
+    int i = 0;
+    while (true) {
+      i++;
+      if (i % 100000 == 0)
+        System.out.println(i);
+    }
+  }
+}
+//main method
+public static void main (String[] args) {
+  MyTheard 1 = new MyThread();
+  t.start();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// RUNNABLE LECTURE ---------------------------------------------------------------------------------------------------------------
+//implementing the interface
+public class RunnableExample implements Runnable {
+  private String id;
+  public RunnableExample(String id) { this.id = id; }
+  public void run() {
+    int i = 0;
+    Date now = null;
+    try{
+      while(true) {
+        now = new Date();
+        i++;
+        if (i%100000 == 0) {
+          System.out.println(i + ": " +id);
+          Thread.sleep(1000);
+        }
+      }
+    } catch (InterruptedException e) {
+      System.out.println(now.toString() + "Thread " + id + " interrupted");
+    }
+  }
+}
+//main method
+public static void maind(String[] args) {
+  RunnableExample r1 = new RunnableExample("r1");
+  RunnableExample r2 = new RunnableExample("r2");
+  RunnableExample r3 = new RunnableExample("r3");
+  Thread t1 = new Thread(r1);
+  Thread t2 = new Thread(r2);
+  Thread t3 = new Thread(r3);
+  t1.start();
+  t2.start();
+  t3.start();
+  try {
+    Thread.sleep(3000);
+    t1.interrupt;
+    Thread.sleep(3000);
+    t2.interrupt;
+    Thread.sleep(3000);
+    t3.interrupt;
+  } catch (InterruptedException e) {
+    System.out.println("Should not happen");
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------     
+
+
+
+
+// RACE/LOCKS LECTURE ---------------------------------------------------------------------------------------------------------------
+//Bank.java
+public class Bank {
+  private double totalBalance;
+  private Lock balanceLock;
+  public Bank() { 
+    totalBalance = 0;
+    balanceLock = new ReentrantLock();
+  }
+  public void deposit(double amount) {
+    balanceLock.lock();
+    totalBalance += amount;
+    balanceLock.unlock();
+  }
+  
+  //can do deposit method as synchronized, but is less flexible
+  //public synchronized void deposit(double amount) {
+    //totalBalance += amount;
+    //return;
+  //}
+  
+  public double getBalance() { return totalBalance; }
+}
+
+//RunnableEx.java
+public class RunnableEx implements Runnable {
+  private String id;
+  private Bank bank;
+  public RunnableEx(String id, Bank bank) {
+    this.id = id;
+    this.bank = bank;
+  }
+  @Override
+  public void run() {
+    System.out.println("In thread " + Thread.currentThread().getId());
+    for (int i = 0; i < 1000; i++) {
+      bank.deposit(10);
+    }
+  }
+}
+
+//MainClass
+public class MainClass {
+  public static void main (String[] args) {
+    Bank b = new Bank();
+    RunnableEx r1 = new RunnableEx("r1", b);
+    RunnableEx r2 = new RunnableEx("r2", b);
+    Thread t1 = new Thread(r1);
+    Thread t2 = new Thread(r2);
+    t1.start();
+    t2.start();
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) { } 
+    System.out.println(b.getBalance());
+  }
+}
